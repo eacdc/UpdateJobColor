@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Update Job Card System</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="app-header">
+        <div class="brand">
+          <div class="brand-logo">UJC</div>
+          <div class="brand-text">
+            <h1>Update Job Card System</h1>
+            <p>Update and modify job card information.</p>
+          </div>
+        </div>
+      </header>
+
+      <main class="app-main app-main--home">
+        <section class="intro">
+          <h2>Update Job Card</h2>
+          <p>Enter a job number to search and update job card details.</p>
+        </section>
+
+        <!-- Job search -->
+        <section class="panel">
+          <form class="job-search" id="jobSearchForm">
+            <div class="field field--inline">
+              <label for="jobNumber">Job Number</label>
+              <div style="position: relative; display: inline-block; width: 100%;">
+                <input
+                  id="jobNumber"
+                  name="jobNumber"
+                  type="text"
+                  placeholder="Enter job number (4+ digits)"
+                  required
+                  autocomplete="off"
+                />
+                <div id="jobNumberDropdown" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: rgba(15, 23, 42, 0.98); border: 1px solid rgba(129, 140, 248, 0.5); border-radius: 0 0 10px 10px; max-height: 200px; overflow-y: auto; z-index: 1000; box-shadow: 0 8px 20px rgba(0,0,0,0.4);">
+                  <!-- Dropdown items will be inserted here -->
+                </div>
+              </div>
+            </div>
+            <button class="primary-btn" type="submit" id="searchBtn">Search</button>
+          </form>
+          <p class="inline-warning" id="jobSearchError" style="display: none;"></p>
+        </section>
+
+        <!-- Section 1: Job details -->
+        <section class="panel panel--collapsible">
+          <header class="panel-header">
+            <h3>Job Details</h3>
+          </header>
+          <div class="panel-body job-details-grid">
+            <div class="field">
+              <label for="clientName">Client Name</label>
+              <input id="clientName" name="clientName" type="text" readonly />
+            </div>
+            <div class="field">
+              <label for="jobName">Job Name</label>
+              <input id="jobName" name="jobName" type="text" readonly />
+            </div>
+            <div class="field">
+              <label for="orderQuantity">Order Quantity</label>
+              <input id="orderQuantity" name="orderQuantity" type="number" readonly />
+            </div>
+            <div class="field">
+              <label for="poDate">PO Date</label>
+              <input id="poDate" name="poDate" type="text" readonly />
+            </div>
+            <div class="field">
+              <label for="planContName">Plan Content Name</label>
+              <select id="planContName" name="planContName" style="display: none;">
+                <option value="">Select Plan Content Name</option>
+              </select>
+              <p id="planContNameMessage" style="display: none; color: var(--text-muted); font-size: 0.85rem; margin: 0;">Loading...</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 2: Color Cards -->
+        <section class="panel panel--collapsible" id="colorCardsSection" style="display: none;">
+          <header class="panel-header">
+            <h3>Color Details</h3>
+          </header>
+          <div class="panel-body">
+            <div class="color-cards-container">
+              <!-- Top Row: Front and Sp. Front -->
+              <div class="color-cards-row">
+                <div class="color-card" id="frontCard">
+                  <h4 class="color-card-header">Front</h4>
+                  <div class="color-card-content" id="frontContent">
+                    <p class="no-colors-message">No colors found</p>
+                  </div>
+                </div>
+                <div class="color-card" id="spFrontCard">
+                  <h4 class="color-card-header">Sp. Front</h4>
+                  <div class="color-card-content" id="spFrontContent">
+                    <p class="no-colors-message">No colors found</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Bottom Row: Back and Sp. Back -->
+              <div class="color-cards-row">
+                <div class="color-card" id="backCard">
+                  <h4 class="color-card-header">Back</h4>
+                  <div class="color-card-content" id="backContent">
+                    <p class="no-colors-message">No colors found</p>
+                  </div>
+                </div>
+                <div class="color-card" id="spBackCard">
+                  <h4 class="color-card-header">Sp. Back</h4>
+                  <div class="color-card-content" id="spBackContent">
+                    <p class="no-colors-message">No colors found</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="color-cards-actions" style="display: none;">
+              <button class="primary-btn" id="saveChangesBtn" type="button">Save Changes</button>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="app-footer">
+        <span>Update Job Card System</span>
+        <span class="divider">•</span>
+        <span>Job Details</span>
+      </footer>
+    </div>
+
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
