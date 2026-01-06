@@ -400,18 +400,34 @@ function attachColorItemListeners(colorItem) {
 // Function to load items for dropdown
 async function loadItemsForDropdown(dropdown) {
   try {
+    console.log('🔄 [FRONTEND] Loading items for dropdown...');
+    console.log('🔄 [FRONTEND] Dropdown element:', dropdown);
+    
     const response = await jobsAPI.getItemsForColor();
+    console.log('🔄 [FRONTEND] API response:', response);
+    console.log('🔄 [FRONTEND] Response.items:', response.items);
+    console.log('🔄 [FRONTEND] Items length:', response.items ? response.items.length : 0);
+    
     if (response.items && response.items.length > 0) {
-      response.items.forEach(item => {
+      console.log(`✅ [FRONTEND] Found ${response.items.length} items, populating dropdown...`);
+      
+      response.items.forEach((item, index) => {
+        console.log(`  Item ${index + 1}:`, item);
         const option = document.createElement('option');
         option.value = item.itemId || '';
         option.textContent = item.itemName || '';
         option.setAttribute('data-item-name', item.itemName || '');
         dropdown.appendChild(option);
+        console.log(`  Added option: value="${option.value}", text="${option.textContent}"`);
       });
+      
+      console.log('✅ [FRONTEND] Dropdown now has', dropdown.options.length, 'options');
+      console.log('✅ [FRONTEND] Dropdown HTML:', dropdown.innerHTML.substring(0, 200));
+    } else {
+      console.warn('⚠️ [FRONTEND] No items in response or empty array');
     }
   } catch (error) {
-    console.error('Error loading items for dropdown:', error);
+    console.error('❌ [FRONTEND] Error loading items for dropdown:', error);
   }
 }
 
